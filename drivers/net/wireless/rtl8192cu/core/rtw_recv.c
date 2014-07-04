@@ -4107,8 +4107,8 @@ _recv_data_drop:
 }
 
 
-int recv_func(_adapter *padapter, union recv_frame *rframe);
-int recv_func(_adapter *padapter, union recv_frame *rframe)
+int rtw_recv_func(_adapter *padapter, union recv_frame *rframe);
+int rtw_recv_func(_adapter *padapter, union recv_frame *rframe)
 {
 	int ret;
 	struct rx_pkt_attrib *prxattrib = &rframe->u.hdr.attrib;
@@ -4166,7 +4166,7 @@ _func_enter_;
 	precvpriv = &padapter->recvpriv;
 
 
-	if ((ret = recv_func(padapter, precvframe)) == _FAIL)
+	if ((ret = rtw_recv_func(padapter, precvframe)) == _FAIL)
 	{
 		RT_TRACE(_module_rtl871x_recv_c_,_drv_info_,("rtw_recv_entry: recv_func return fail!!!\n"));
 		goto _recv_entry_drop;
