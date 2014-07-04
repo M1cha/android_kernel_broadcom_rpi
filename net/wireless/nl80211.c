@@ -6644,6 +6644,7 @@ void __cfg80211_send_event_skb(struct sk_buff *skb, gfp_t gfp)
 
 	nla_nest_end(skb, data);
 	genlmsg_end(skb, hdr);
+	struct cfg80211_registered_device *rdev = ((void **)skb->cb)[0];
 
 	if (data->nla_type == NL80211_ATTR_VENDOR_DATA)
 		genlmsg_multicast_netns(wiphy_net(&rdev->wiphy), skb, 0,
@@ -10192,7 +10193,8 @@ void cfg80211_mgmt_tx_status(struct wireless_dev *wdev, u64 cookie,
 
 	genlmsg_end(msg, hdr);
 
-	genlmsg_multicast(msg, 0, nl80211_mlme_mcgrp.id, gfp);
+	genlmsg_multicast_netns(wiphy_net(&rdev->wiphy), msg, 0,
+				nl80211_mlme_mcgrp.id, gfp);
 	return;
 
  nla_put_failure:
