@@ -490,10 +490,10 @@ static void pcm512x_remove(struct device *dev)
 			       pcm512x->supplies);
 }
 
-/* TODO
+/* TODO */
 static int pcm512x_suspend(struct device *dev)
 {
-	struct pcm512x_priv *pcm512x = dev_get_drvdata(dev);
+	/*struct pcm512x_priv *pcm512x = dev_get_drvdata(dev);
 	int ret;
 
 	ret = regmap_update_bits(pcm512x->regmap, PCM512x_POWER,
@@ -511,14 +511,14 @@ static int pcm512x_suspend(struct device *dev)
 	}
 
 	if (!IS_ERR(pcm512x->sclk))
-		clk_disable_unprepare(pcm512x->sclk);
+		clk_disable_unprepare(pcm512x->sclk);*/
 
 	return 0;
 }
 
 static int pcm512x_resume(struct device *dev)
 {
-	struct pcm512x_priv *pcm512x = dev_get_drvdata(dev);
+	/*struct pcm512x_priv *pcm512x = dev_get_drvdata(dev);
 	int ret;
 
 	if (!IS_ERR(pcm512x->sclk)) {
@@ -548,13 +548,13 @@ static int pcm512x_resume(struct device *dev)
 	if (ret != 0) {
 		dev_err(dev, "Failed to remove power down: %d\n", ret);
 		return ret;
-	}
+	}*/
 
 	return 0;
 }
 
 // END OF PCM512x_suspend and resume calls TODO 
-*/
+
 
 static const struct dev_pm_ops pcm512x_pm_ops = {
 	SET_RUNTIME_PM_OPS(pcm512x_suspend, pcm512x_resume, NULL)
